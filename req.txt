@@ -1,0 +1,16 @@
+Authorization =>   Basic d3NoYWhyOjEyMzQ1Ng==
+
+127.0.0.1:9094/api/wallet/issuer/response/requestStatus
+
+
+
+{
+	"stan": "200000000046",
+	"referenceNumber": 207488061556444,
+	"requestType": "PersonalWalletRegister"
+}
+
+
+
+-------
+portal:http://10.193.3.29:8081/CityCenter/

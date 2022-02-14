@@ -1,0 +1,117 @@
+syntax = "proto3";
+package ir.faash.grpc.services;
+
+option java_package = "ir.faash.aaasystem.grpc.services";
+
+option java_multiple_files = true;
+option optimize_for = SPEED;
+
+message LoginRequest {
+	string userName = 1;
+	string password = 2;
+	int32 domainId = 3;
+	enum Channel {
+    WEB = 0;
+    MOBILE = 1;
+    APPCLIENT = 2;
+  }
+  Channel channel = 4;
+  bool token=5;
+}
+
+message LoginResponse {
+	int32   resultCode = 1;
+	string  resultmessage=2;
+	string  tokentype=3;
+	string  accesstoken = 4;
+	string  refreshtoken=5;
+	string  expiredin=6;
+	string  lastLogin =7;
+
+}
+
+message FetchUserInfoRequest {
+
+	string token = 1;
+
+}
+message RefreshTokenRequest {
+
+	string refreshToken = 1;
+
+}
+message ValidateTokenRequest {
+
+	string jwtToken = 1;
+
+}
+
+message RefreshTokenResponse {
+	int32   resultCode = 1;
+	string  resultmessage=2;
+	string  tokentype=3;
+	string  accesstoken = 4;
+	string  refreshtoken=5;
+	string  expiredin=6;
+	string  lastLogin =7;
+
+}
+
+
+
+message FetchUserInfoResponse {
+
+	string token = 1;
+	int64 userId = 2;
+	int64 nationalCode = 3;
+	string userName = 4;
+	string firstName = 5;
+	string lastName = 6;
+	int32 serviceCode = 7;
+	string userProperties = 8;
+	string lastLogin = 9;
+}
+
+
+message ValidateTokenResponse{
+	int32   resultCode = 1;
+	enum JWTTokenStatus {
+		TOKENVALID = 0;
+		TOKENEXPIERD = 1;
+		TOKENNOTVALID = 2;
+	}
+	JWTTokenStatus jwtTokenStatus = 2;
+
+
+}
+
+message  PermissionRequest
+{
+	int64   userId=1;
+	int32   operationid=2;
+	int32   domainid=3;
+
+}
+message  PermissionResult
+{
+
+	enum PermissionStatus {
+	      ACCESSED= 0;
+			  DENIED = 1;
+}
+	PermissionStatus  permissionstatus= 1;
+
+
+	}
+service AAAService {
+	rpc login(LoginRequest)                  returns (LoginResponse);
+	rpc fetchUserInfo(FetchUserInfoRequest)  returns (FetchUserInfoResponse);
+	rpc refreshToken(RefreshTokenRequest)    returns(RefreshTokenResponse);
+	rpc validateToken(ValidateTokenRequest)  returns(ValidateTokenResponse);
+	rpc hasPermission(PermissionRequest)     returns(PermissionResult);
+}
+userName": "TestEdge",
+  "password": "E7440B88A5F373D9C5D8B0F661A082DD",
+  "domainId": 40,
+  "channel": 40,
+  "token": true
